@@ -5,7 +5,8 @@ from main import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index, name='index'),
-    path('<str:username>/', main, name='main'),
-    path('<str:username>/set/', set, name='set')
+    path('main/', include('main.urls')),
+    path('', main, name='index'),
+    # path('<str:username>/', main, name='main'),
+    path('set/', set, name='set')
 ]
