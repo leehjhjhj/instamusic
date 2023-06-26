@@ -16,6 +16,7 @@ bucket_name = 'tuaz'
 
 class SongUploadView(View):
     def post(self, request):
+        user = request.user
         thumbnail_file = request.FILES.get('thumbnail')
         name = request.POST.get('name')
         artist = request.POST.get('artist')
@@ -27,7 +28,8 @@ class SongUploadView(View):
         os.rename(stream, mp3_file_path)
         # S3에 mp3 파일 업로드
         file_name = os.path.basename(mp3_file_path)
-        s3.upload_file(mp3_file_path, bucket_name, file_name)
+        s3_key = 'music/' + file_name
+        s3.upload_file(mp3_file_path, bucket_name, s3_key)
 
 
         # 업로드된 파일의 URL 설정

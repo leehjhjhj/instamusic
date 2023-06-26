@@ -8,5 +8,6 @@ urlpatterns = [
     path('main/', include('main.urls')),
     path('', main, name='index'),
     # path('<str:username>/', main, name='main'),
-    path('set/', set, name='set')
+    path('set/', set, name='set'),
+    path('login/', login, name='login')
 ]

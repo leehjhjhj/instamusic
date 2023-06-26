@@ -9,3 +9,6 @@ def main(request):
 
 def set(request):
     return render(request, 'set.html')
+
+def login(request):
+    return render(request, 'login.html')
