@@ -1,0 +1,95 @@
+
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<body>
+    <form method="POST" action="{% url 'main:upload'%}" id="change_order" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3>Song name</h3>
+        <input class="form-control form-control-lg" name="name" type="text" placeholder=".form-control-lg"
+            aria-label=".form-control-lg example"><br>
+        Artist name
+        <input class="form-control form-control-lg" name="artist" type="text" placeholder=".form-control-lg"
+            aria-label=".form-control-lg example"><br>
+        Youtube url
+        <input class="form-control form-control-lg" name="youtube_url" type="text" placeholder=".form-control-lg"
+            aria-label=".form-control-lg example"><br>
+        <button type="submit" name="draft" class="form-control-submit-button" id="submit-btn">add</button>
+    </form>
+
+    <div class="playlist">
+        <h2>Now playlist</h2><br>
+        {% for song in playlist %}
+        <div class="playlist-item">
+            <span>{{ song.name }} / {{ song.artist }}</span>
+        </div>
+        {% endfor %}
+        <br>
+        <a href="{% url 'index' %}">home</a>
+    </div>
+
+</body>
+<style>
+    body {
+background-color: rgb(73, 96, 111);
+
+/* Smoothly transition the background color */
+transition: background-color .5s;
+}
+form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        background-color: transparent;
+    }
+
+    input.form-control {
+        width: 300px;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.5);
+    }
+
+    button.form-control-submit-button {
+        width: 150px;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+    }
+
+    button.form-control-submit-button:hover {
+        background-color: rgba(255, 255, 255, 0.7);
+    }
+    .playlist {
+        background-color: transparent;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        background-color: transparent;
+    }
+
+    .playlist-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.5);
+        transition: background-color 0.3s ease;
+    }
+
+    .playlist-item:hover {
+        background-color: rgba(255, 255, 255, 0.7);
+    }
+</style>
+
+      
+{% endblock %}

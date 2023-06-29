@@ -2,7 +2,7 @@
   <div class="form">
     <form method="POST" action="{% url 'accounts:register' %}" class="login-form" id="join-form">
       {% csrf_token %}
-      <input type="text" name="email" id="email-input" placeholder="이메일" required/>
+      <input type="text" name="username" id="email-input" placeholder="아이디" required/>
       {% if errors.email %}
       <div class="error-message">{{ errors.email }}</div>
       {% endif %}
@@ -31,19 +31,19 @@
         'X-CSRFToken': csrfToken
       },
       data: {
-        email: email,
+        username: email,
         csrfmiddlewaretoken: csrfToken
       },
       success: function(response) {
         if (response.duplicated == 'error') {
-          alert('잘못된 이메일 형식입니다.')
+          alert('잘못된 아이디 형식입니다.')
           $("#join-submit").attr("id_check_result", "fail");
         }
         else if (response.duplicated) {
-          alert('이미 사용 중인 이메일입니다.');
+          alert('이미 사용 중인 ID입니다.');
           $("#join-submit").attr("id_check_result", "fail");
         } else {
-          alert('중복되지 않는 이메일입니다.');
+          alert('사용 가능한 ID입니다.');
           $("#join-submit").attr("id_check_result", "success");
         }
       },
@@ -101,7 +101,7 @@ font-size: 14px;
 font-family: "Roboto", sans-serif;
 text-transform: uppercase;
 outline: 0;
-background: #4CAF50;
+background: rgb(123, 163, 189);
 width: 100%;
 border: 0;
 padding: 15px;
@@ -112,7 +112,7 @@ transition: all 0.3 ease;
 cursor: pointer;
 }
 .form button:hover,.form button:active,.form button:focus {
-background: #43A047;
+    background: rgb(200, 228, 246);
 }
 .form .message {
 margin: 15px 0 0;
@@ -160,9 +160,7 @@ text-decoration: none;
 color: #EF3B3A;
 }
 body {
-background: #76b852; /* fallback for old browsers */
-background: rgb(141,194,111);
-background: linear-gradient(90deg, rgba(141,194,111,1) 0%, rgba(118,184,82,1) 50%);
+background-color: rgb(73, 96, 111);
 font-family: "Roboto", sans-serif;
 -webkit-font-smoothing: antialiased;
 -moz-osx-font-smoothing: grayscale;      

@@ -5,12 +5,12 @@
       {% endif %}
       <form method="POST" action="{% url 'accounts:login' %}"  class="login-form">
         {% csrf_token %}
-        <input type="text" name="email" placeholder="example@example.com" required/>
+        <input type="text" name="username" placeholder="아이디" required/>
         <input type="password" name="password" placeholder="PASSWORD" required/>
-        <button type="submit">로그인</button>
+        <button type="submit">login</button>
       </form>
       <a href="{% url 'accounts:register' %}">
-        <button>회원가입</button>
+        <button>signup</button>
       </a>
     </div>
   </div>
@@ -48,7 +48,7 @@
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
-  background: #4CAF50;
+  background: rgb(123, 163, 189);
   width: 100%;
   border: 0;
   padding: 15px;
@@ -59,7 +59,7 @@
   cursor: pointer;
 }
 .form button:hover,.form button:active,.form button:focus {
-  background: #43A047;
+  background: rgb(200, 228, 246);
 }
 .form .message {
   margin: 15px 0 0;
@@ -67,7 +67,7 @@
   font-size: 12px;
 }
 .form .message a {
-  color: #4CAF50;
+  color: rgb(123, 163, 189);
   text-decoration: none;
 }
 .form .register-form {
@@ -107,9 +107,7 @@
   color: #EF3B3A;
 }
 body {
-  background: #76b852; /* fallback for old browsers */
-  background: rgb(141,194,111);
-  background: linear-gradient(90deg, rgba(141,194,111,1) 0%, rgba(118,184,82,1) 50%);
+  background-color: rgb(73, 96, 111);
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;      

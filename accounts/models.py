@@ -6,5 +6,4 @@ from django.contrib.auth.models import UserManager
 class User(AbstractUser):
     first_name = None
     last_name = None
-    email = None
-    username = models.EmailField(unique=True, verbose_name="이메일",)
+    username = models.CharField(max_length=20, unique=True, verbose_name="아이디",)

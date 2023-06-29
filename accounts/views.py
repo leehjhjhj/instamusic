@@ -9,28 +9,28 @@ def login_view(request):
     return render(request, 'login.html')
   
   if request.method == 'POST':
-    email = request.POST.get('email')
+    username = request.POST.get('username')
     password = request.POST.get('password')
     user = authenticate(
         request=request,
-        username=email,
+        username=username,
         password=password
     )
     if user is not None:
         login(request, user)
-        return redirect('index')
-    return render(request, 'login.html', {'message': '이메일이나 비밀번호를 다시 한번 확인해주십시오.'})
+        return redirect('main', username=username)
+    return render(request, 'login.html', {'message': '아이디나 비밀번호를 다시 한번 확인해주십시오.'})
 
 
 def register_view(request):
     if request.method == 'POST':
-        email = request.POST.get('email')
+        username = request.POST.get('username')
         password = request.POST.get('password')
         password2 = request.POST.get('password2')
 
         errors = {}
-        if not re.match(r'^[a-zA-Z0-9_.]+@[a-zA-Z0-9]+\.[a-zA-Z0-9.]+$', email):
-            errors['email'] = '이메일은 영문 대소문자, 숫자, 언더바(_), ".", "@"만 가능합니다.'
+        if not re.match(r'^[a-zA-Z0-9_.]', username):
+            errors['email'] = '아이디는 영어와 숫자만 가능합니다.'
         if password != password2:
            errors['password'] = '비밀번호가 일치하지 않습니다.'
 
@@ -38,7 +38,7 @@ def register_view(request):
             return render(request, 'register.html', {'errors': errors})
         
 
-        user = User.objects.create(username=email)
+        user = User.objects.create(username=username)
         user.set_password(password)
         user.save()
 
@@ -48,15 +48,17 @@ def register_view(request):
 
 def logout_view(request):
 	logout(request)
-	return render(request, 'login.html')
+	return redirect('main')
 
 def check_email_duplication(request):
     if request.method == 'POST':
-        email = request.POST.get('email')
-        if not re.match(r'^[a-zA-Z0-9_.]+@[a-zA-Z0-9]+\.[a-zA-Z0-9.]+$', email):
+        username = request.POST.get('username')
+        print(username)
+        if not re.match(r'^[a-zA-Z0-9_.]', username):
+            print('형식 에러')
             return JsonResponse({'duplicated': 'error'})
         
-        if User.objects.filter(username=email).exists():
+        if User.objects.filter(username=username).exists():
             return JsonResponse({'duplicated': True})
         else:
             return JsonResponse({'duplicated': False})

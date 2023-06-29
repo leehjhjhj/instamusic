@@ -4,11 +4,6 @@ from django.shortcuts import render
 def index(request):
     return render(request, 'index.html')
 
-def main(request):
-    return render(request, 'main.html')
-
-def set(request):
-    return render(request, 'set.html')
 
 def login(request):
     return render(request, 'login.html')
