@@ -5,6 +5,7 @@
 <body>
     <form method="POST" action="{% url 'main:upload'%}" id="change_order" enctype="multipart/form-data">
         {% csrf_token %}
+        <h1>{{ user.username }}'s setting room</h1>
         <h3>Song name</h3>
         <input class="form-control form-control-lg" name="name" type="text" placeholder=".form-control-lg"
             aria-label=".form-control-lg example" required><br>
@@ -25,7 +26,7 @@
         </div>
         {% endfor %}
         <br>
-        <a href="{% url 'index' %}">home</a>
+        <a href="{% url 'main' user.username %}">home</a>
     </div>
 
 </body>

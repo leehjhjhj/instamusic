@@ -7,8 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('main/', include('main.urls')),
     path('accounts/', include('accounts.urls')),
-    path('', MainView.as_view(), name='index'),
-    path('index/', index, name='dd'),
+    path('', index, name='index'),
     path('set/', SetView.as_view(), name='set'),
     path('<str:username>/', MainView.as_view(), name='main'),
 ]
