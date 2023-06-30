@@ -21,7 +21,7 @@ jobs:
           project: 201802977/instamusic
           stage: main
           yaml: |
-            name: tuaz50th
+            name: instamusic
             app: python@3.9
             options:
               env:
