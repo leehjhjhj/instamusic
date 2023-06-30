@@ -49,16 +49,18 @@
 		value="99" class="volume_slider" onchange="setVolume()">
 	<i class="fa fa-volume-up"></i>
 	</div>
+  <br>
+  {% if not user.is_authenticated %} 
+  <a href="{% url 'accounts:login' %}">login</a>
+  <a href="{% url 'accounts:register' %}">signup</a>
+  {% else %}
+  <a href="{% url 'set' %}">setting</a>
+  <a href="{% url 'accounts:logout' %}">logout</a>
+  {% endif %}
+  {{ user.username }}
 </div>
 
-{% if not user.is_authenticated %} 
-<a href="{% url 'accounts:login' %}">login</a>
-<a href="{% url 'accounts:register' %}">signup</a>
-{% else %}
-<a href="{% url 'set' %}">setting</a>
-<a href="{% url 'accounts:logout' %}">logout</a>
-{% endif %}
-{{ user.username }}
+
 <!-- Load the main script for the player -->
 <script src="main.js"></script>
 </body>
